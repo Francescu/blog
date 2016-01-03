@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="blog">
+<head>
+	<title>Blog</title>
+	<link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" ng-controller="ArticleController as articleCtrl">
+        <h1 ng-show="articleCtrl.loading">Loading</h1>
+        <h2>Blog</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table table-striped">
+                    <tr ng-repeat='article in articleCtrl.articles'>
+                        <td>{{ article.title }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <div class="row">
+        <form name="articleForm" ng-submit="articleForm.$valid && articleCtrl.add()" novalidate>
+            <div class="col-md-4">
+                <input type="text" ng-model="articleCtrl.article.title" required />
+                <br />
+                <textarea ng-model="articleCtrl.article.content" required></textarea>
+                <br />
+                <input type="submit" value="Save" />
+                <br />
+                Form is {{ articleForm.$valid }}
+            </div>
+        </form>
+        <br />
+        <pre>{{ articleCtrl.article | json }}</pre>
+    </div>
+    </div>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="js/lb-services.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
